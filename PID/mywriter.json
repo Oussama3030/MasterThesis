@@ -1,0 +1,19 @@
+{
+    
+    "internal-dpl-aod-writer":     {
+    "OutputDirector": {
+    "resfile": "AnalysisResults_Trees",
+    "ntfmerge": 10,
+    "OutputDescriptors": [
+        {
+        "table": "AOD/TRACKEXTRA/1",
+        "columns": [
+            "tpcSignal"
+        ],
+        "treename": "Results"
+        } 
+    ]
+    }
+}
+
+}
