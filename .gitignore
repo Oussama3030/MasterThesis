@@ -1,3 +1,4 @@
 *.root
 ML/training_samples.npy
 stdout.log
+.DS_Store
