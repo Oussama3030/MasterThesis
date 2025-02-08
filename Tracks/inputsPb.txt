@@ -1,0 +1,2 @@
+ alien:///alice/data/2023/LHC23zzh/544124/apass2_upc/0830/o2_ctf_run00544124_orbit0314205728_tf0000000131_epn170/002/AO2D.root
+ alien:///alice/data/2023/LHC23zzh/544124/apass2_upc/0830/o2_ctf_run00544124_orbit0314205728_tf0000000131_epn170/001/AO2D.root
