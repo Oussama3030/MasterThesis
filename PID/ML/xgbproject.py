@@ -60,10 +60,16 @@ training_input, testing_input, training_target, testing_target = train_test_spli
 #           'colsample_bytree': 0.8207917373372546, 'gamma': 4.508976811996854, 'learning_rate': 0.12623238845489873, 
 #           'scale_pos_weight': 11.091305274794989, 'eval_metric': 'aucpr', 'objective': 'multi:softmax', 'num_class': 5}
 
-params = {'max_depth': 8, 'n_estimators': 114, 'tree_method': 'approx', 
-          'min_child_weight': 1, 'subsample': 0.8373789281965098, 'colsample_bytree': 0.8682734933639846, 
-          'gamma': 1.7933569494141572, 'learning_rate': 0.2913448240677106, 'objective': 'multi:softprob', 'eval_metric': 'auc'
-}
+# params = {'max_depth': 8, 'n_estimators': 114, 'tree_method': 'approx', 
+#           'min_child_weight': 1, 'subsample': 0.8373789281965098, 'colsample_bytree': 0.8682734933639846, 
+#           'gamma': 1.7933569494141572, 'learning_rate': 0.2913448240677106, 'objective': 'multi:softprob', 'eval_metric': 'auc'
+# }
+
+params = {'n_estimators': 176, 'max_depth': 11, 'min_child_weight': 5, 
+          'subsample': 0.8384450785184981, 'colsample_bytree': 0.808193537251804, 
+          'gamma': 1.4444987173198711, 'learning_rate': 0.129286878127211,
+          'objective': 'multi:softprob', 'eval_metric': 'auc', 'tree_method': 'approx'}
+
 
 # Compute class weights based on target distribution
 sample_weights = class_weight.compute_sample_weight(

@@ -12,7 +12,7 @@ import numpy.ma as ma
 # Open the root file and access the TTree
 file = uproot.open('/Users/oussamabenchikhi/o2workdir/PID/myTrees.root')
 
-keys = [key for key in file.keys() if key.endswith("/TpcData;1")]#[:30]
+keys = [key for key in file.keys() if key.endswith("/TpcData;1")]#[:50]
 
 branch1_data = []  # fSignal
 branch2_data = []  # fPt

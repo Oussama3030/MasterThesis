@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 import uproot
 import ROOT
 import pandas as pd
-
 from sklearn.neural_network import MLPClassifier
 import torch
 from torch import nn
@@ -100,9 +99,16 @@ optimizer = optim.Adam(model.parameters(), lr=0.001)
 scheduler = lr_scheduler.LinearLR(optimizer, start_factor=1.0, end_factor=0.1, total_iters=10)
 
 # Set number of epochs
-epochs = 50
+epochs = 2
+
+all_test_labels = []
+all_test_predictions = []
+
+# Save the test probabilities
+all_test_probabilities = []
 
 for epoch in tqdm(range(epochs), desc="Training ..."):
+
     ### Training Phase
     model.train()
     correct_predictions, total_samples = 0, 0
@@ -141,7 +147,6 @@ for epoch in tqdm(range(epochs), desc="Training ..."):
     epoch_acc = correct_predictions / total_samples
     # epoch_acc[0] = ((predicted == labels) * (labels == 0)).float().sum() / (max(labels == 0).sum(), 1)
 
-
     ### Validation Phase
     model.eval()
     correct_predictions_test, total_samples_test = 0, 0
@@ -149,6 +154,7 @@ for epoch in tqdm(range(epochs), desc="Training ..."):
 
     all_labels_test = []
     all_predictions_test = []
+    all_probabilities_test = []  
 
     with torch.no_grad():
         for data in loader_testing:
@@ -166,6 +172,13 @@ for epoch in tqdm(range(epochs), desc="Training ..."):
 
             all_labels_test.extend(labels.cpu().numpy())
             all_predictions_test.extend(predicted.cpu().numpy())
+            # Save the test probabilities
+            all_probabilities_test.extend(F.softmax(outputs, dim=1).cpu().numpy())
+    
+    if epoch == epochs - 1:
+        all_test_labels = all_labels_test.copy()
+        all_test_predictions = all_predictions_test.copy()
+        all_test_probabilities = all_probabilities_test.copy()
 
 
     epoch_loss_avg_test = epoch_loss_test / len(loader_testing)
@@ -200,5 +213,18 @@ for epoch in tqdm(range(epochs), desc="Training ..."):
         ax2.set_ylabel('True')
         
         plt.tight_layout()
-        plt.show()
-        
+        # plt.show()
+
+# Save the labels and predictions in a .npy file
+np.save("all_test_labels.npy", all_test_labels)
+np.save("all_test_predictions.npy", all_test_predictions)
+np.save("all_test_probabilities.npy", all_test_probabilities)
+
+# Print the probabilities as a pandas dataframe
+df = pd.DataFrame(all_test_probabilities)
+df.columns = [f"Class_{i}" for i in range(df.shape[1])]
+df["True_Label"] = all_test_labels
+df["Predicted_Label"] = all_test_predictions
+print(df)
+
+print("Classification Report (Testing):\n", classification_report(all_test_labels, all_test_predictions))

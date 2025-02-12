@@ -5,7 +5,7 @@ from torch import nn
 class PIDModelv1(nn.Module):
     def __init__(self):
         super(PIDModelv1, self).__init__()
-        self.fc1 = nn.Linear(11, 256)
+        self.fc1 = nn.Linear(3, 256)
         self.fc2 = nn.Linear(256, 512)
         self.fc3 = nn.Linear(512, 256)
         self.fc4 = nn.Linear(256, 5)
