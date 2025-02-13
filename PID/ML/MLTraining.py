@@ -29,7 +29,7 @@ mapped_targets = np.load('mapped_targets.npy')
 # Split the data
 training_input, testing_input, training_target, testing_target = train_test_split(training_samples, 
                                                     mapped_targets, 
-                                                    test_size=0.2, # 20% test, 80% train
+                                                    test_size=0.3, # 20% test, 80% train
                                                     stratify=mapped_targets, # Ensures similar ratio's in test and training 
                                                     random_state=42) # make the random split reproducible
 
@@ -40,6 +40,10 @@ class_weights = 1. / np.bincount(training_target)
 class_weights = torch.from_numpy(class_weights).type(torch.float)
 
 print(class_weights)
+
+# Print a dataframe with the amount of unique classes
+print(pd.DataFrame({"label": np.unique(testing_target), "count": np.bincount(testing_target)}))
+
 
 # # Compute weights
 # class_counts = np.bincount(training_target)
@@ -75,7 +79,6 @@ test_input, test_output = testing_input.to(device), testing_target.to(device)
 dataset_training = TensorDataset(train_input, train_output)
 dataset_testing = TensorDataset(test_input, test_output)
 
-
 # sampler = torch.utils.data.WeightedRandomSampler(
 #     weights=sample_weights,
 #     num_samples=len(sample_weights),
@@ -99,7 +102,7 @@ optimizer = optim.Adam(model.parameters(), lr=0.001)
 scheduler = lr_scheduler.LinearLR(optimizer, start_factor=1.0, end_factor=0.1, total_iters=10)
 
 # Set number of epochs
-epochs = 2
+epochs = 25
 
 all_test_labels = []
 all_test_predictions = []
@@ -216,9 +219,9 @@ for epoch in tqdm(range(epochs), desc="Training ..."):
         # plt.show()
 
 # Save the labels and predictions in a .npy file
-np.save("all_test_labels.npy", all_test_labels)
-np.save("all_test_predictions.npy", all_test_predictions)
-np.save("all_test_probabilities.npy", all_test_probabilities)
+np.save("all_test_labels.npy", np.array(all_test_labels))
+np.save("all_test_predictions.npy", np.array(all_test_predictions))
+np.save("all_test_probabilities.npy", np.array(all_test_probabilities))
 
 # Print the probabilities as a pandas dataframe
 df = pd.DataFrame(all_test_probabilities)
@@ -228,3 +231,7 @@ df["Predicted_Label"] = all_test_predictions
 print(df)
 
 print("Classification Report (Testing):\n", classification_report(all_test_labels, all_test_predictions))
+
+# Save the model
+
+torch.save(model.state_dict(), "model.pth")
