@@ -62,7 +62,9 @@ class DomainClassifier(nn.Module):
 # Combining the networks   
 class DANN(nn.Module):
     def __init__(self):
-        super(DANN, self).__inito
+        super(DANN, self).__init__()
+        self.feature_extractor = FeatureExtractor()
+        self.class_classifier = ClassClassifier()
+        self.domain_classifier = DomainClassifier()
 
-# Print the model
-print(DANN())
+print(DANN())   

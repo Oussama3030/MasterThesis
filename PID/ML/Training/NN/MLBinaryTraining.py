@@ -184,9 +184,6 @@ import os
 # Define the relative path from Training/NN to Models
 save_dir = "~/o2workdir/PID/ML/Models"
 
-# Make sure the directory exists (just in case)
-os.makedirs(save_dir, exist_ok=True)
-
 # Save the model
 torch.save(model.state_dict(), os.path.join(save_dir, "NNBinaryModel.pth"))
 

@@ -65,7 +65,7 @@ training_input, testing_input, training_target, testing_target = train_test_spli
 #           'gamma': 1.7933569494141572, 'learning_rate': 0.2913448240677106, 'objective': 'multi:softprob', 'eval_metric': 'auc'
 # }
 
-params = {'n_estimators': 176, 'max_depth': 11, 'min_child_weight': 5, 
+params = {'n_estimators': 175, 'max_depth': 11, 'min_child_weight': 5, 
           'subsample': 0.8384450785184981, 'colsample_bytree': 0.808193537251804, 
           'gamma': 1.4444987173198711, 'learning_rate': 0.129286878127211,
           'objective': 'multi:softprob', 'eval_metric': 'auc', 'tree_method': 'approx'}
@@ -84,7 +84,6 @@ sample_weights = class_weight.compute_sample_weight(
 # Define the scale pos weight
 # scale_pos_weight =  np.sum(training_target == 0) / np.sum(training_target == 1)
 
-
 # Train the model
 clf = xgb.XGBClassifier(**params)
 clf.fit(training_input, training_target,
@@ -96,8 +95,9 @@ clf.fit(training_input, training_target,
 
 import os
 # Define the absolute path
+
 save_dir = "~/o2workdir/PID/ML/Models"
-os.makedirs(save_dir, exist_ok=True)
+# os.makedirs(save_dir, exist_ok=True)
 
 # Save the model
 clf.save_model(os.path.join(save_dir, 'XGBModel.json'))

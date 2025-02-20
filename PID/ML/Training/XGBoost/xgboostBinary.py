@@ -71,7 +71,6 @@ clf.fit(training_input, training_target,
 import os
 # Define the absolute path
 save_dir = "~/o2workdir/PID/ML/Models"
-os.makedirs(save_dir, exist_ok=True)
 
 # Save the model
 clf.save_model(os.path.join(save_dir, 'XGBModel_Binary.json'))
