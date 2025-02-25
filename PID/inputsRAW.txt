@@ -1,0 +1,6 @@
+alien:///alice/data/2022/LHC22o/528531/apass6/0620/o2_ctf_run00528531_orbit0444365952_tf0000636547_epn041/001/AO2D.root
+alien:///alice/data/2022/LHC22o/528531/apass6/0620/o2_ctf_run00528531_orbit0444365952_tf0000636547_epn041/002/AO2D.root
+alien:///alice/data/2022/LHC22o/528531/apass6/0620/o2_ctf_run00528531_orbit0444255104_tf0000635681_epn107/001/AO2D.root
+alien:///alice/data/2022/LHC22o/528531/apass6/0620/o2_ctf_run00528531_orbit0444255104_tf0000635681_epn107/002/AO2D.root
+alien:///alice/data/2022/LHC22o/528531/apass6/0620/o2_ctf_run00528531_orbit0444338176_tf0000636330_epn139/001/AO2D.root
+alien:///alice/data/2022/LHC22o/528531/apass6/0620/o2_ctf_run00528531_orbit0444338176_tf0000636330_epn139/002/AO2D.root

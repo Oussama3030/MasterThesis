@@ -83,9 +83,9 @@ label_to_idx = {label: idx for idx, label in enumerate(unique_labels)}
 idx_to_label = {idx: label for label, idx in label_to_idx.items()}
 
 # Convert PDG codes to consecutive integers
-mapped_targets = np.array([label_to_idx[label] for label in target_samples])
+# mapped_targets = np.array([label_to_idx[label] for label in target_samples])
 
-# mapped_targets = np.array([1 if label == 11 else 0 for label in target_samples])
+mapped_targets = np.array([1 if label == 11 else 0 for label in target_samples])
 
 
 # Create DataFrame with both original and mapped labels

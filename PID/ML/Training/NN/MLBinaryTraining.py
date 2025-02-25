@@ -80,7 +80,7 @@ print(model)
 loss_fn = nn.BCEWithLogitsLoss(pos_weight = scale_pos_weight)
 optimizer = optim.Adam(model.parameters(), lr=0.0001)
 # scheduler = lr_scheduler.LinearLR(optimizer, start_factor=1.0, end_factor=0.1, total_ite
-epochs = 10
+epochs = 2
 
 # Initialize lists to store history outside the loop
 training_history = {
